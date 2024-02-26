@@ -50,10 +50,6 @@ const options = {
     legend: {
       visible: true,
   },
-    series: {
-    showLabel: true,
-    doughtnut: true,
-    }
 };
 
 
@@ -92,6 +88,7 @@ function App ({omdbIds, apiIds}) {
   },[currentPage,currentMovie])
 
   let dataOdierna = new Date()
+
   dataOdierna = dataOdierna.getDate()+ '/'+(dataOdierna.getMonth()+1)+'/'+dataOdierna.getFullYear() 
 
 
@@ -106,14 +103,13 @@ function App ({omdbIds, apiIds}) {
           <ul>
             <li><button onClick={()=>{setCurrentPage(0)}}>Opere</button></li>
             <li><button onClick={()=>{setCurrentPage(1)}}>Film</button></li>
-            <li><button onClick={()=>{setCurrentPage(3)}}>Grafico recensioni</button></li>
+            <li><button onClick={()=>{setCurrentPage(2)}}>Grafico recensioni</button></li>
           </ul>
         </nav>
       </header>
 
-
       <main>
-        {!data&&currentPage!==3&&
+        {!data&&currentPage!==2&&
           <div>Loading...</div>
         }
         {
@@ -133,16 +129,16 @@ function App ({omdbIds, apiIds}) {
             <h2>Titolo: {data.Title}</h2>
             <p>Attori: {data.Actors}</p>
             <p>Trama: {data.Plot}</p>
-            <img alt={data.Title} src={data.Poster}/>
+            <img alt={data.Title} src={data.Poster} style={{height: '300px'}}/>
           </>
         }
 
-        {currentPage===3&&
+        {currentPage===2&&
           
           <BarChart data={bardata} options={options} style={{}}/>
         }
 
-        {currentPage!==3&&
+        {currentPage!==2&&
         <div>
           <button onClick={handlePrevButton}>Indietro</button>
           <button onClick={handleNextButton}>Avanti</button>
